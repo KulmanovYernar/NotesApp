@@ -8,6 +8,10 @@ android {
     namespace 'com.example.teamproject'
     compileSdk 32
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId "com.example.teamproject"
         minSdk 23
