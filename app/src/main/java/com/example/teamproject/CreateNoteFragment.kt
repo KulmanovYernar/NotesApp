@@ -35,7 +35,7 @@ class CreateNoteFragment : BaseFragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            HomeFragment().apply {
+            CreateNoteFragment().apply {
                 arguments = Bundle().apply {
 
                 }
@@ -47,7 +47,7 @@ class CreateNoteFragment : BaseFragment() {
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
         currentDate = sdf.format(Date())
 
-       tvDateTime.text = currentDate
+        tvDateTime.text = currentDate
 
         imgDone.setOnClickListener {
             //saveNote
@@ -77,7 +77,7 @@ class CreateNoteFragment : BaseFragment() {
             notes.noteText = etNoteDesc.text.toString()
             notes.dateTime = currentDate
             context?.let {
-                NotesDatabase.getDatabase(it).notesDao().insertNotes(notes)
+                NotesDatabase.getDatabase(it).noteDao().insertNotes(notes)
                 etNoteTitle.setText("")
                 etNoteSubTitle.setText("")
                 etNoteDesc.setText("")
