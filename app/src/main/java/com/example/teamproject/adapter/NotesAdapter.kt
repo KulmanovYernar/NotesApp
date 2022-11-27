@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.example.teamproject.R
 import com.example.teamproject.entities.Notes
 
-class NotesAdapter (val arrList: ArrayList<Notes>) :
+class NotesAdapter (val arrList: List<Notes>) :
     RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         return NotesViewHolder(
@@ -24,4 +24,5 @@ class NotesAdapter (val arrList: ArrayList<Notes>) :
     class NotesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     }
+
     }
