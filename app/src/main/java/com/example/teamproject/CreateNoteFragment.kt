@@ -1,14 +1,16 @@
 package com.example.teamproject
 
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Note
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import android.widget.Toast
 import com.example.teamproject.database.NotesDatabase
 import com.example.teamproject.entities.Notes
+import kotlinx.android.synthetic.main.fragment_create_note.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,7 +47,7 @@ class CreateNoteFragment : BaseFragment() {
         val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
         currentDate = sdf.format(Date())
 
-        tvDateTime.text = curretDate
+       tvDateTime.text = currentDate
 
         imgDone.setOnClickListener {
             //saveNote
@@ -75,7 +77,7 @@ class CreateNoteFragment : BaseFragment() {
             notes.noteText = etNoteDesc.text.toString()
             notes.dateTime = currentDate
             context?.let {
-                NotesDatabase.getDatabase(it).noteDao().insertNotes(notes)
+                NotesDatabase.getDatabase(it).notesDao().insertNotes(notes)
                 etNoteTitle.setText("")
                 etNoteSubTitle.setText("")
                 etNoteDesc.setText("")
@@ -85,12 +87,12 @@ class CreateNoteFragment : BaseFragment() {
 
     fun replaceFragment(fragment: Fragment, istransition: Boolean)
     {
-        val fragmentTransition = activity!!.supportFragmentManager.beginTransaction()
+        val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
 
         if (istransition)
         {
             fragmentTransition.setCustomAnimations(android.R.anim.slide_out_right,android.R.anim.slide_in_left)
         }
-        fragmentTransition.replace(R.id.frame_layout, fragment).addToBackStack(fragment.javaClass.simpleName)
+        fragmentTransition.replace(R.id.frame_layout, fragment).addToBackStack(fragment.javaClass.simpleName).commit()
     }
 }
