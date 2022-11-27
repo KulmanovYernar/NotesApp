@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 //            binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(R.layout.activity_main)
 
-            replaceFragment(HomeFragment.newInstance(),true)
+            replaceFragment(HomeFragment.newInstance(),false)
     }
 
     fun replaceFragment(fragment: Fragment, isTransition:Boolean){

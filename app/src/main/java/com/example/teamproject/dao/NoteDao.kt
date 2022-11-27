@@ -1,15 +1,17 @@
 package com.example.teamproject.dao
 
 import androidx.room.*
-import com.codingwithme.notesapp.entities.Notes
 import com.example.teamproject.entities.Notes
 
 @Dao
-interface NoteDao{
+interface NoteDao {
+
     @Query("SELECT * FROM notes ORDER BY id DESC")
-    suspend fun getAllNotes() : List<Notes>
+    suspend fun getAllNotes(): List<Notes>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNotes(note:Notes)
+    suspend fun insertNotes(note: Notes)
+
     @Delete
-    suspend fun deleteNote(note:Notes)
+    suspend fun deleteNote(note: Notes)
 }
