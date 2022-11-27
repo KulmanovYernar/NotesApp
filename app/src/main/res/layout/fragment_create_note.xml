@@ -48,6 +48,26 @@
         android:ellipsize="end"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+    <TextView
+        android:id="@+id/tvDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNoteTitle"
+        android:textColor="@color/colorGray"
+        android:textSize="@dimen/_8ssp"
+        android:fontFamily="@font/manrope_bold"
+        android:textColorHint="@color/colorGray"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
     <LinearLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
@@ -56,7 +76,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNoteTitle">
+        app:layout_constraintTop_toBottomOf="@+id/tvDateTime">
         
         <View
             android:layout_width="@dimen/_5sdp"
