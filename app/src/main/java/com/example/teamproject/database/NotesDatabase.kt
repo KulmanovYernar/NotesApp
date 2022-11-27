@@ -1,22 +1,29 @@
 package com.example.teamproject.database
 
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.codingwithme.notesapp.dao.NoteDao
-import com.codingwithme.notesapp.entities.Notes
-@Database(entities = [Notes: :class], version = 1, exportSchema = false)
-abstract class NotesDatabase : RoomDatabase0 {
-    companion object f
-    var notesDatabase: NotesDatabase? = null
-    @Synchronized
-    fun getDatabase (context: Context): NotesDatabase
-    if (notesDatabase != null) f
-    notesDatabase = Room.databaseBuilder(
-    context
-    NotesDatabase: :class. java
-    name: "notes.db"
-    ). buildO
-    return notesDatabase!!
-    abstract fun notrDao:NoteDao
+import com.example.teamproject.dao.NoteDao
+import com.example.teamproject.entities.Notes
+
+@Database(entities = [Notes::class], version = 1, exportSchema = false)
+
+abstract class NotesDatabase : RoomDatabase() {
+    companion object {
+        var notesDatabase: NotesDatabase? = null
+
+        @Synchronized
+        fun getDatabase(context: Context): NotesDatabase {
+            if (notesDatabase != null) {
+                notesDatabase = Room.databaseBuilder(
+                    context,
+                    NotesDatabase::class.java,
+                    "notes.db").build()
+            }
+            return notesDatabase!!
+        }
+    }
+
+    abstract fun notesDao(): NoteDao
 }
