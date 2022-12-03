@@ -1,5 +1,8 @@
 package com.example.teamproject
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 
 import androidx.fragment.app.Fragment
@@ -10,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.teamproject.database.NotesDatabase
 import com.example.teamproject.entities.Notes
+import com.example.teamproject.util.NoteBottomSheetFragment
 import kotlinx.android.synthetic.main.fragment_create_note.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -57,6 +61,10 @@ class CreateNoteFragment : BaseFragment() {
         imgBack.setOnClickListener {
             replaceFragment(HomeFragment.newInstance(), false)
         }
+      imgMore.setOnClickListener {
+          var noteBottomSheetFragment = NoteBottomSheetFragment.newInstance()
+          noteBottomSheetFragment.show(requireActivity().supportFragmentManager,"Note Buttom Sheet fragment ")
+      }
     }
 
     private fun saveNote()
@@ -94,5 +102,10 @@ class CreateNoteFragment : BaseFragment() {
             fragmentTransition.setCustomAnimations(android.R.anim.slide_out_right,android.R.anim.slide_in_left)
         }
         fragmentTransition.replace(R.id.frame_layout, fragment).addToBackStack(fragment.javaClass.simpleName).commit()
+    }
+    private val BroadcastReceiver : BroadcastReceiver = object : BroadcastReceiver(){
+        override fun onReceive(p0: Context?, p1: Intent?){
+            var actioncololor = p1!!.getStringExtra( "actionColor")
+        }
     }
 }
