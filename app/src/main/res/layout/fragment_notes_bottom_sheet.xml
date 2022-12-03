@@ -61,27 +61,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/_5sdp">
 
         <FrameLayout
+            android:id="@+id/fNote1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/_5sdp"
-            android:id="@+id/fNote1">
+            android:layout_height="17dp"
+            android:paddingStart="5.00dp">
 
             <View
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:background="@drawable/note_color_1"/>
+                android:layout_width="24.00dp"
+                android:layout_height="24.00dp"
+                android:background="@drawable/note_color_1" />
 
             <ImageView
                 android:id="@+id/imgNote1"
-                android:layout_width="@dimen/_16sdp"
-                android:layout_height="@dimen/_16sdp"
+                android:layout_width="19dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                app:tint="@color/white"/>
+                app:tint="@color/white" />
         </FrameLayout>
 
         <FrameLayout
