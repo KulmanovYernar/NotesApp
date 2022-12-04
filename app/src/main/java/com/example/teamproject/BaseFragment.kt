@@ -8,7 +8,7 @@ import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseFragment : Fragment(),CoroutineScope{
-    abstract val selectedColor: String?
+
     private lateinit var job: Job
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main

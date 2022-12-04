@@ -24,6 +24,7 @@ import java.util.*
 
 class CreateNoteFragment : BaseFragment() {
     var currentDate:String? = null
+    var selectedColor = "#171C26"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -112,43 +113,65 @@ class CreateNoteFragment : BaseFragment() {
         }
         fragmentTransition.replace(R.id.frame_layout, fragment).addToBackStack(fragment.javaClass.simpleName).commit()
     }
-    private val BroadcastReceiver : BroadcastReceiver = object : BroadcastReceiver(){
-        override fun onReceive(p0: Context?, p1: Intent?){
-            var actioncololor = p1!!.getStringExtra( "actionColor")
 
-            when(actioncololor!!){
+    private val BroadcastReceiver : BroadcastReceiver = object :BroadcastReceiver(){
+        override fun onReceive(p0: Context?, p1: Intent?) {
 
-                "Blue" ->{
-                     selectedColor = p1.getStringExtra("selectedColor")
-                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+            var actionColor = p1!!.getStringExtra("action")
+
+            when(actionColor!!){
+
+                "Blue" -> {
+                        selectedColor = p1.getStringExtra("selectedColor")!!
+                    colorView.setBackgroundColor(Color.parseColor(selectedColor))
+
                 }
 
-                "Yellow" ->{
-                    selectedColor = p1.getStringExtra("selectedColor")
+                "Yellow" -> {
+                    selectedColor = p1.getStringExtra("selectedColor")!!
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+
                 }
-                "Purple" ->{
-                    selectedColor = p1.getStringExtra("selectedColor")
+
+
+                "Purple" -> {
+                    selectedColor = p1.getStringExtra("selectedColor")!!
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+
                 }
-                "Green" ->{
-                    selectedColor = p1.getStringExtra("selectedColor")
+
+
+                "Green" -> {
+                    selectedColor = p1.getStringExtra("selectedColor")!!
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+
                 }
-                "Orange" ->{
-                    selectedColor = p1.getStringExtra("selectedColor")
+
+
+                "Orange" -> {
+                    selectedColor = p1.getStringExtra("selectedColor")!!
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+
                 }
-                "Black" ->{
-                    selectedColor = p1.getStringExtra("selectedColor")
+
+
+                "Black" -> {
+                    selectedColor = p1.getStringExtra("selectedColor")!!
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+
                 }
-                else ->{
-                    selectedColor = p1.getStringExtra("selectedColor")
+
+
+
+
+                else -> {
+                    selectedColor = p1.getStringExtra("selectedColor")!!
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
+
                 }
             }
         }
+
     }
 
     override fun onDestroy() {

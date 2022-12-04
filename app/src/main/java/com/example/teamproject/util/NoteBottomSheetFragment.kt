@@ -1,10 +1,10 @@
 package com.example.teamproject.util
 
+
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,12 +24,14 @@ class NoteBottomSheetFragment: BottomSheetDialogFragment() {
             val fragment = NoteBottomSheetFragment()
             fragment.arguments = args
             return fragment
+        }
+    }
 
             @SuppressLint("RestrictedApi")
-            fun setupDialog(dialog: Dialog, style: Int) {
+            override fun setupDialog(dialog: Dialog, style: Int) {
                 super.setupDialog(dialog, style)
-                val view =
-                    LayoutInflater.from(context).inflate(R.layout.fragment_notes_bottom_sheet, null)
+
+                val view = LayoutInflater.from(context).inflate(R.layout.fragment_notes_bottom_sheet,null)
                 dialog.setContentView(view)
 
                 val param = (view.parent as View).layoutParams as CoordinatorLayout.LayoutParams
@@ -179,5 +181,3 @@ class NoteBottomSheetFragment: BottomSheetDialogFragment() {
             }
 
         }
-    }
-}
