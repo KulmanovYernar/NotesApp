@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/fragment_create_note.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22301483154296878" />
+        <entry key="app/src/main/res/layout/fragment_notes_bottom_sheet.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/item_rv_notes.xml" value="0.1703125" />
       </map>
     </option>
