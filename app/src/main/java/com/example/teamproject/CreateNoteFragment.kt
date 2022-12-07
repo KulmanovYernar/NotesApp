@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.media.Image
 import android.os.Bundle
+import android.provider.MediaStore
 
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -165,6 +166,7 @@ class CreateNoteFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,E
 
                 }
                "Image" ->{
+                   readStorageTask()
 
                }
 
@@ -183,5 +185,47 @@ class CreateNoteFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,E
     override fun onDestroy() {
         LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(BroadcastReceiver )
         super.onDestroy()
+    }
+    private fun hasReadStoragePerm():Boolean{
+        return EasyPermissions.hasPermissions(requireContext(),Manifest.permission.READ_EXTERNAL_STORAGE)
+    }
+
+
+    private fun readStorageTask(){
+        if (hasReadStoragePerm()){
+
+
+            pickImageFromGallery()
+        }else{
+            EasyPermissions.requestPermissions(
+                    requireActivity(),
+                    getString(R.string.storage_permission_text),
+                    READ_STORAGE_PERM,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+        }
+    }
+
+    private fun pickImageFromGallery(){
+        var intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        if (intent.resolveActivity(requireActivity().packageManager) != null){
+            startActivityForResult(intent,REQUEST_CODE_IMAGE)
+        }
+    }
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(requireActivity(),perms)){
+            AppSettingsDialog.Builder(requireActivity()).build().show()
+        }
+    }
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+
+    }
+
+    override fun onRationaleDenied(requestCode: Int) {
+
+    }
+
+    override fun onRationaleAccepted(requestCode: Int) {
+
     }
 }
