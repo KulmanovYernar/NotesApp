@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.media.Image
 import android.os.Bundle
@@ -27,8 +28,10 @@ import java.util.*
 
 class CreateNoteFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,EasyPermissions.RationaleCallbacks{
     var currentDate:String? = null
-    private var READ STORAGE_PERM = 123
-    private var WRITE STORAGE_PERM = 123
+    private var READ_STORAGE_PERM = 123
+    private var WRITE_STORAGE_PERM = 123
+    private var REQUEST_CODE_IMAGE = 456
+
     var selectedColor = "#171C26"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -191,17 +194,17 @@ class CreateNoteFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,E
     }
 
 
-    private fun readStorageTask(){
-        if (hasReadStoragePerm()){
+    private fun readStorageTask() {
+        if (hasReadStoragePerm()) {
 
 
             pickImageFromGallery()
-        }else{
+        } else {
             EasyPermissions.requestPermissions(
-                    requireActivity(),
-                    getString(R.string.storage_permission_text),
-                    READ_STORAGE_PERM,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
+                requireActivity(),
+                getString(R.string.storage_permission_text),
+                READ_STORAGE_PERM,
+                Manifest.permission.READ_EXTERNAL_STORAGE
             )
         }
     }
@@ -212,6 +215,36 @@ class CreateNoteFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,E
             startActivityForResult(intent,REQUEST_CODE_IMAGE)
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_IMAGE && requestCode == RESULT_OK) {
+            if (data != null) {
+                var selectedImageUrl = data.data
+                if (selectedImageUrl != null) {
+                    try {
+                        var inputStream = requireActivity().contextResolver.openInputStream(selectedImageUrl)
+                        var bitmap = BitmapFactory.decodeStream(inputStream)
+                        imgNote.setImageBitmap(bitmap)
+                        imgNote.visibility = View.VISIBLE
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         if (EasyPermissions.somePermissionPermanentlyDenied(requireActivity(),perms)){
             AppSettingsDialog.Builder(requireActivity()).build().show()
