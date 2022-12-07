@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.teamproject.database.NotesDatabase
 import com.example.teamproject.entities.Notes
@@ -23,8 +24,10 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CreateNoteFragment : BaseFragment() {
+class CreateNoteFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,EasyPermissions.RationaleCallbacks{
     var currentDate:String? = null
+    private var READ STORAGE_PERM = 123
+    private var WRITE STORAGE_PERM = 123
     var selectedColor = "#171C26"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
