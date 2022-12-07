@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
+import android.media.Image
 import android.os.Bundle
 
 import androidx.fragment.app.Fragment
@@ -160,7 +161,9 @@ class CreateNoteFragment : BaseFragment() {
                     colorView.setBackgroundColor(Color.parseColor(selectedColor))
 
                 }
+               "Image" ->{
 
+               }
 
 
 
