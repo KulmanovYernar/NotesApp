@@ -1,8 +1,11 @@
 package com.example.teamproject.adapter
 
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.translation.ViewTranslationRequest
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject.R
 import com.example.teamproject.entities.Notes
@@ -26,8 +29,16 @@ class NotesAdapter(val arrList:List<Notes>) :
         holder.itemView.tvDateTime.text = arrList[position].dateTime
         if (arrList[position].color != null) {
             holder.itemView.cardView.setCardBackgroundColor(Color.parseColor(arrList[position].color))
+        } else {
+            holder.itemView.cardview.setCardBackgroundColor(Color.parseColor(R.color.ColorLightBlack.toString()))
+        }
+
+        if (arrList[position].imgPath != null) {
+            holder.itemView.imgNote.setImageBitmap(BitmapFactory.decodeFile(arrList[position].ImgPath))
+            holder.itemView.imgNote.visibility = View.VISIBLE
         }else{
-        holder.itemView.cardview.setCardBackgroundColor(Color.parseColor(R.color.ColorLightBlack))
+            holder.itemView.imgNote.visibility = View.GONE
+        }
     }
 
     class NotesViewHolder(view: View) : RecyclerView.ViewHolder(view) {

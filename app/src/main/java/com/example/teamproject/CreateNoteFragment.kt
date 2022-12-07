@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.media.Image
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 
@@ -27,10 +28,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class CreateNoteFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,EasyPermissions.RationaleCallbacks{
+    var selectedColor = "#171C26"
     var currentDate:String? = null
     private var READ_STORAGE_PERM = 123
     private var WRITE_STORAGE_PERM = 123
     private var REQUEST_CODE_IMAGE = 456
+    private var selectedImagePath = ""
 
     var selectedColor = "#171C26"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,11 +105,14 @@ class CreateNoteFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,E
             notes.noteText = etNoteDesc.text.toString()
             notes.dateTime = currentDate
             notes.color= selectedColor
+            notes.imgPath = selectedImagePath
             context?.let {
                 NotesDatabase.getDatabase(it).noteDao().insertNotes(notes)
                 etNoteTitle.setText("")
                 etNoteSubTitle.setText("")
                 etNoteDesc.setText("")
+                imgNote.visibility = View.GONE
+                requireActivity().supportFragmentManager.popBackStack()
             }
         }
     }
@@ -216,9 +222,23 @@ class CreateNoteFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,E
         }
     }
 
+    private fun getPathFromUri(contentUri: Uri): String? {
+        var filePath:String? = null
+        var cursor = requireActivity().contentResolver.query(contentUri, null, null, null, null)
+        if (cursor == null){
+            filePath = contentUri.path
+        }else{
+            cursor.moveToFirst()
+            var index = cursor.getColumnIndex("_data")
+            filePath = cursor.getString(index)
+            cursor.close()
+        }
+        return filePath
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_IMAGE && requestCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE_IMAGE && resultCode == RESULT_OK) {
             if (data != null) {
                 var selectedImageUrl = data.data
                 if (selectedImageUrl != null) {
@@ -227,6 +247,8 @@ class CreateNoteFragment : BaseFragment(), EasyPermissions.PermissionCallbacks,E
                         var bitmap = BitmapFactory.decodeStream(inputStream)
                         imgNote.setImageBitmap(bitmap)
                         imgNote.visibility = View.VISIBLE
+
+                        selectedImagePath = getPathFromUri(selectedImageUrl)!!
                     } catch (e: Exception) {
                         Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
                     }
