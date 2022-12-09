@@ -17,7 +17,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
+
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.teamproject.database.NotesDatabase
 import com.example.teamproject.entities.Notes
