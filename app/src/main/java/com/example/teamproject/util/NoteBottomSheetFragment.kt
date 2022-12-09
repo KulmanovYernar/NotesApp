@@ -63,7 +63,6 @@ class NoteBottomSheetFragment: BottomSheetDialogFragment() {
 
                                 BottomSheetBehavior.STATE_HIDDEN -> {
                                     state = "HIDDEN"
-                                    dismiss()
                                     behavior.state = BottomSheetBehavior.STATE_COLLAPSED
                                 }
                             }
