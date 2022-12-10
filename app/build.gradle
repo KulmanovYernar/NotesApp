@@ -60,7 +60,9 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3'
 
-    implementation "pub.devrel:easypermissions:3.3.3"
+    implementation "pub.devrel:easypermissions:3.0.0"
+
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }

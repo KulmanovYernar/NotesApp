@@ -23,10 +23,10 @@ class Notes: Serializable{
     var noteText: String? = null
 
     @ColumnInfo(name = "img_path")
-    var ImgPath: String? = null
+    var imgPath: String? = null
 
     @ColumnInfo(name = "web_link")
-    var weblink: String? = null
+    var webLink: String? = null
 
     @ColumnInfo(name = "color")
     var color: String? = null
